@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</h1>
+<p>Построить математическую модель для выбора правильной стратегии при решении примера задаче о погоне.</p>
+<h1 id="%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5">Задание</h1>
+<p>На море в тумане катер береговой охраны преследует лодку браконьеров.
+Через определенный промежуток времени туман рассеивается, и лодка
+обнаруживается на расстоянии 17,3 км от катера. Затем лодка снова скрывается в
+тумане и уходит прямолинейно в неизвестном направлении. Известно, что скорость
+катера в 5,1 раза больше скорости браконьерской лодки.</p>
+<ol>
+<li>
+<p>Запишите уравнение, описывающее движение катера, с начальными
+условиями для двух случаев (в зависимости от расположения катера
+относительно лодки в начальный момент времени).</p>
+</li>
+<li>
+<p>Постройте траекторию движения катера и лодки для двух случаев.</p>
+</li>
+<li>
+<p>Найдите точку пересечения траектории катера и лодки</p>
+</li>
+</ol>
+<h1 id="%D1%82%D0%B5%D0%BE%D1%80%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5">Теоретическое введение</h1>
+<p>Кривая погони — кривая, представляющая собой решение задачи о «погоне», которая ставится следующим образом. Пусть точка A равномерно движется по некоторой заданной кривой. Требуется найти траекторию равномерного движения точки P такую, что касательная, проведённая к траектории в любой момент движения, проходила бы через соответствующее этому моменту положение точки A [@wiki:bash].</p>
+<h1 id="%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Выполнение лабораторной работы</h1>
+<p>Формула для выбора варианта: <code>(1132226460%70)+1</code> = 51 вариант.</p>
+<p>Запишем уравнение описывающее движение катера, с начальными условиями для двух случаев (в зависимости от расположения катера относительно лодки в начальный момент времени).</p>
+<p>Принимем за $t_0 = 0$, $x_0 = 0$ -- место нахождения лодки браконьеров в момент обнаружения,$x_{k0} = k$ - место нахождения катера береговой охраны относительно лодки браконьеров в момент обнаружения лодки.</p>
+<p>Введем полярные координаты. Считаем, что полюс - это точка обнаружения лодки браконьеров $x_{k0}$ ($\theta = x_{k0} = 0$), а полярная ось $r$ проходит через точку нахождения катера береговой охраны.</p>
+<p>Траектория катера должна быть такой, чтобы и катер, и лодка все время были на одном расстоянии от полюса $\theta$ , только в этом случае траектория
+катера пересечется с траекторией лодки. Поэтому для начала катер береговой охраны должен двигаться некоторое время прямолинейно, пока не окажется на том же расстоянии от полюса, что и лодка браконьеров. После этого катер береговой охраны должен двигаться вокруг полюса удаляясь от него с той же скоростью, что и лодка браконьеров.</p>
+<p>Чтобы найти расстояние $x$ (расстояние после которого катер начнет двигаться вокруг полюса), необходимо составить простое уравнение. Пусть через время $t$ катер и лодка окажутся на одном расстоянииx от полюса. За это время лодка пройдет $x$ , а катер $k-x$ (или $k+x$, в зависимости от начального положения катера относительно полюса). Время, за которое они пройдут это расстояние, вычисляется как $\dfrac{x}{v}$ или $\dfrac{k-x}{5.1v}$ (во втором случае $\dfrac{k+x}{5.1v}$). Так как время одно и то же, то эти величины одинаковы. Тогда неизвестное расстояниеx можно найти из следующего уравнения:</p>
+<p>$$
+\dfrac{x}{v} = \dfrac{k-x}{5.1v} \text{ -- в первом случае}
+$$
+$$
+\dfrac{x}{v} = \dfrac{k+x}{5.1v} \text{ -- во втором}
+$$</p>
+<p>Отсюда мы найдем два значения $x_1 = \dfrac{17.3}{6.1}$ и $x_2 = \dfrac{17.3}{4.1}$, задачу будем решать для двух случаев.</p>
+<p>После того, как катер береговой охраны окажется на одном расстоянии от полюса, что и лодка, он должен сменить прямолинейную траекторию и начать двигаться вокруг полюса удаляясь от него со скоростью лодки $v$. Для этого скорость катера раскладываем на две составляющие: $v_{r}$ - радиальная скорость и  - $v_{\tau}$ тангенциальная скорость. Радиальная скорость - это скорость, с которой катер удаляется от полюса, $v_r = \dfrac{dr}{dt}$. Нам нужно, чтобы эта скорость была равна скорости лодки, поэтому полагаем $\dfrac{dr}{dt} = v$.</p>
+<p>Тангенциальная скорость – это линейная скорость вращения катера относительно полюса. Она равна произведению угловой скорости $\dfrac{d \theta}{dt}$ на радиус $r$, $r \dfrac{d \theta}{dt}$.</p>
+<p>Получаем:</p>
+<p>$$v_{\tau} = \sqrt{26.01v^2-v^2} = \sqrt{25.01}v$$</p>
+<p>Из чего можно вывести:</p>
+<p>$$
+r\dfrac{d \theta}{dt} = \sqrt{25.01}v
+$$</p>
+<p>Решение исходной задачи сводится к решению системы из двух дифференциальных уравнений:</p>
+<p>$$\begin{cases}
+&amp;\dfrac{dr}{dt} = v\
+&amp;r\dfrac{d \theta}{dt} = \sqrt{25.01}v
+\end{cases}$$</p>
+<p>С начальными условиями для первого случая:</p>
+<p>$$\begin{cases}
+&amp;{\theta}_0 = 0\  \tag{1}
+&amp;r_0 = \dfrac{17.3}{6.1}
+\end{cases}$$</p>
+<p>Или для второго:</p>
+<p>$$\begin{cases}
+&amp;{\theta}_0 = -\pi\  \tag{2}
+&amp;r_0 = \dfrac{17.3}{4.1}
+\end{cases}$$</p>
+<p>Исключая из полученной системы производную по $t$, можно перейти к следующему уравнению:</p>
+<p>$$
+\dfrac{dr}{d \theta} = \dfrac{r}{\sqrt{15.81}}
+$$</p>
+<p>Начальные условия остаются прежними. Решив это уравнение, мы получим траекторию движения катера в полярных координатах.</p>
+<h2 id="%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8">Построение модели</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">using</span> DifferentialEquations, Plots
+
+<span class="hljs-comment"># расстояние от лодки до катера</span>
+
+k = <span class="hljs-number">11.4</span> 
+
+<span class="hljs-comment"># начальные условия для 1 и 2 случаев</span>
+
+r0 = k/<span class="hljs-number">5.1</span> 
+r0_2 = k/<span class="hljs-number">3.1</span> 
+theta0 = (<span class="hljs-number">0.0</span>, <span class="hljs-number">2</span>*<span class="hljs-literal">pi</span>) 
+theta0_2 = (-<span class="hljs-literal">pi</span>, <span class="hljs-literal">pi</span>)
+
+<span class="hljs-comment"># данные для движения лодки браконьеров</span>
+
+fi = <span class="hljs-number">3</span>*<span class="hljs-literal">pi</span>/<span class="hljs-number">4</span>;
+t = (<span class="hljs-number">0</span>, <span class="hljs-number">50</span>);
+
+<span class="hljs-comment"># функция, описывающая движение лодки браконьеров</span>
+
+x(t) = tan(fi)*t;
+
+<span class="hljs-comment"># функция, описывающая движение катера береговой охраны</span>
+
+f(r, p, t) = r/sqrt(<span class="hljs-number">15.81</span>)
+
+<span class="hljs-comment"># постановка проблемы и решение ДУ для 1 случая</span>
+
+prob = ODEProblem(f, r0, theta0)
+
+sol = solve(prob, saveat = <span class="hljs-number">0.01</span>)
+
+<span class="hljs-comment"># отрисовка траектории движения катера</span>
+
+plot(sol.t, sol.u, proj=:polar, lims=(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>), label = <span class="hljs-string">"Траекория движения катера"</span>)
+</div></code></pre>
+<p>В результате получаем такой рисунок (рис. [-@fig:001]):</p>
+<p><img src="image/photo_1.jpg" alt="Траекория движения катера в 1 случае">{#fig:001 width=70%}</p>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">## необходимые действия для построения траектории движения лодки</span>
+
+ugol = [fi <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,<span class="hljs-number">15</span>)]
+
+x_lims = [x(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,<span class="hljs-number">15</span>)]
+
+<span class="hljs-comment"># отрисовка траектории движения лодки вместе с катером</span>
+
+plot!(ugol, x_lims, proj=:polar, lims=(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>), label = <span class="hljs-string">"Траекория движения лодки"</span>)
+</div></code></pre>
+<p>В результате получаем такой рисунок (рис. [-@fig:002]):</p>
+<p><img src="image/photo_2.jpg" alt="Траекория движения катера и лодки">{#fig:002 width=70%}</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">using</span> Printf
+
+<span class="hljs-comment"># Определяем функцию y(x)</span>
+<span class="hljs-keyword">function</span> y(x)
+    <span class="hljs-keyword">return</span> (<span class="hljs-number">173</span>*exp((<span class="hljs-number">10</span>*x)/(sqrt(<span class="hljs-number">2501</span>))))/(<span class="hljs-number">61</span>)
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment"># Вычисляем y(3π/4)</span>
+x_value = <span class="hljs-number">3</span> * <span class="hljs-literal">pi</span> / <span class="hljs-number">4</span>
+result = y(x_value)
+
+<span class="hljs-meta">@printf</span>(<span class="hljs-string">"y(3π/4) = %.5f\n"</span>, result)
+
+<span class="hljs-comment"># точка пересечения лодки и катера для 1 случая</span>
+
+y(<span class="hljs-number">3</span><span class="hljs-literal">π</span>/<span class="hljs-number">4</span>) = <span class="hljs-number">4.54289</span>
+</div></code></pre>
+<p>Теперь перейдем к решению в случае 2.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># постановка проблемы и решение ДУ для 2 случая</span>
+
+prob_2 = ODEProblem(f, r0_2, theta0_2)
+
+sol_2 = solve(prob_2, saveat = <span class="hljs-number">0.01</span>)
+
+<span class="hljs-comment"># отрисовка траектории движения катера</span>
+
+plot(sol_2.t, sol_2.u, proj=:polar, lims=(<span class="hljs-number">0</span>,<span class="hljs-number">15</span>), label = <span class="hljs-string">"Траекория движения катера"</span>)
+</div></code></pre>
+<p>В результате получаем такой рисунок (рис. [-@fig:003]):</p>
+<p><img src="image/photo_3.jpg" alt="Траекория движения катера во 2 случае">{#fig:003 width=70%}</p>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># отрисовка траектории движения лодки вместе с катером</span>
+
+plot!(ugol, x_lims, proj=:polar, lims=(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>), label = <span class="hljs-string">"Траекория движения лодки"</span>)
+</div></code></pre>
+<p>В результате получаем такой рисунок (рис. [-@fig:004]):</p>
+<p><img src="image/photo_4.jpg" alt="Траекория движения катера во 2 случае">{#fig:004 width=70%}</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">using</span> Printf
+
+<span class="hljs-comment"># Определяем функцию y(x)</span>
+<span class="hljs-keyword">function</span> y(x)
+    <span class="hljs-keyword">return</span> (<span class="hljs-number">173</span> * exp((<span class="hljs-number">10</span> * x) / sqrt(<span class="hljs-number">2501</span>) + (<span class="hljs-number">10</span> * <span class="hljs-literal">pi</span>) / sqrt(<span class="hljs-number">2501</span>))) / <span class="hljs-number">41</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment"># Вычисляем y(3π/4)</span>
+x_value = <span class="hljs-number">3</span> * <span class="hljs-literal">pi</span> / <span class="hljs-number">4</span>
+result = y(x_value)
+
+<span class="hljs-meta">@printf</span>(<span class="hljs-string">"y(3π/4) = %.5f\n"</span>, result)
+
+y(<span class="hljs-number">3</span><span class="hljs-literal">π</span>/<span class="hljs-number">4</span>) = <span class="hljs-number">12.66772</span>
+</div></code></pre>
+<h1 id="%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B">Выводы</h1>
+<p>В процессе выполнения данной лабораторной работы я построила математическую модель для выбора правильной стратегии при решении примера задаче о погоне и решила задачу коши</p>
+<h1 id="%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D1%8Bunnumbered">Список литературы{.unnumbered}</h1>
+<div class="{#refs}">
+</div>
+
+</body>
+</html>
