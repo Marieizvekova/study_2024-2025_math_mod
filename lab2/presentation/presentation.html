@@ -1,0 +1,129 @@
+<h1 id="информация">Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:60%;">
+<ul>
+<li>Извекова Мария Петровна</li>
+<li>студентка 3 курса</li>
+<li>факультет Физико-математических и естественных наук</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img src="./image/my_photo.jpg" /></p>
+</div>
+</div>
+<h1 id="цель-работы">Цель работы</h1>
+<p>Построить математическую модель для выбора правильной стратегии при
+решении примера задаче о погоне.</p>
+<h1 id="задание">Задание</h1>
+<p>Между страной Х и страной У идет война. Численность состава войск
+исчисляется от начала войны, и являются временными функциями xt()и yt().
+В начальный момент времени страна Х имеет армию численностью 25 000
+человек, а в распоряжении страны У армия численностью в 39 000 человек.
+Для упрощения модели считаем, что коэффициенты a, b, c, h постоянны.
+Также считаем Pt() и Qt() непрерывные функции.</p>
+<h1 id="section"></h1>
+<ol type="1">
+<li>Модель боевых действий между регулярными войсками <span
+class="math inline">$\frac{d x}{d t} = -0.411*x(t) - 0.733*y(t) +
+sin(2*t)+1$</span> и <span class="math inline">$\frac{d y}{d t} =
+-0.55*x(t) -0.664*y(t) + cos(2*t)+1$</span></li>
+</ol>
+<h1 id="section-1"></h1>
+<ol start="2" type="1">
+<li>Модель ведение боевых действий с участием регулярных войск и
+партизанских отрядов <span class="math inline">$\frac{d x}{d t} =
+-0.399*x(t)y(t) - 0.688*y(t) + sin(2*t)+2$</span> и <span
+class="math inline">$\frac{d y}{d t} = -0.299*x(t) -0.811*y(t) +
+cos(3*t)+1$</span></li>
+</ol>
+<h1 id="задание-1">Задание</h1>
+<p>Постройте графики изменения численности войск армии Х и армии У для
+следующих случаев</p>
+<p>Рассмотреть три случая ведения боевых действий: 1. Боевые действия
+между регулярными войсками 2. Боевые действия с участием регулярных
+войск и партизанских отрядов 3. Боевые действия между партизанскими
+отрядами</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<p>Формула для выбора варианта: <code>(1132226460%70)+1</code> = 51
+вариант.</p>
+<h1 id="модель-боевых-действий-между-регулярными-войсками">Модель боевых
+действий между регулярными войсками</h1>
+<div class="columns">
+<div class="column">
+<p><img src="image/photo_2.jpg" id="fig:001" style="width:60.0%" /></p>
+</div><div class="column">
+<p><img src="image/photo_3.jpg" id="fig:001" style="width:60.0%" /></p>
+</div>
+</div>
+<h1 id="section-2"></h1>
+<p>В результате получаем следующий график</p>
+<p><img src="image/photo_4.jpg" id="fig:001" style="width:60.0%" /></p>
+<h1 id="section-3"></h1>
+<p>Теперь давайте построим эту же модель посредством OpenModelica.</p>
+<pre class="modelica"><code>model lab3
+  parameter Real a = 0.441;
+  parameter Real b = 0.773;
+  parameter Real c = 0.55;
+  parameter Real h = 0.664;
+  parameter Real x0 = 25000;
+  parameter Real y0 = 39000;
+  Real x(start=x0);
+  Real y(start=y0);
+equation
+  der(x) = -a*x - b*y+sin(2*time)+1;
+  der(y) = -c*x -h*y+cos(2*time)+1;
+end lab3;</code></pre>
+<h1 id="section-4"></h1>
+<p><img src="image/photo_10.jpg" id="fig:001" style="width:60.0%" /></p>
+<h1
+id="модель-ведение-боевых-действий-с-участием-регулярных-войск-и-партизанских-отрядов">Модель
+ведение боевых действий с участием регулярных войск и партизанских
+отрядов</h1>
+<p>Построим модель на Julia:</p>
+<div class="columns">
+<div class="column">
+<p><img src="image/photo_5.jpg" id="fig:001" style="width:60.0%" /></p>
+</div><div class="column">
+<p><img src="image/photo_6.jpg" id="fig:001" style="width:60.0%" /></p>
+</div>
+</div>
+<h1 id="section-5"></h1>
+<div class="columns">
+<div class="column">
+<p><img src="image/photo_7.jpg" id="fig:001" style="width:60.0%" /></p>
+</div><div class="column">
+<p><img src="image/photo_8.jpg" id="fig:001" style="width:60.0%" /></p>
+</div>
+</div>
+<h1 id="section-6"></h1>
+<p>Уменьшаем масштаб, чтобы увидеть, где начинается уменьшение армии
+Y</p>
+<p><img src="image/photo_9.jpg" id="fig:001" style="width:60.0%" /></p>
+<h1 id="section-7"></h1>
+<p>Теперь давайте построим эту же модель посредством OpenModelica.</p>
+<pre><code>model lab3_part
+  parameter Real a = 0.399;
+  parameter Real b = 0.688;
+  parameter Real c = 0.299;
+  parameter Real h = 0.811;
+  parameter Real x0 = 25000;
+  parameter Real y0 = 39000;
+  Real x(start=x0);
+  Real y(start=y0);
+equation
+  der(x) = -a*x - b*y+sin(2*time)+2;
+  der(y) = -c*x*y -h*y+cos(3*time)+1;
+end lab3_part;
+</code></pre>
+<h1 id="section-8"></h1>
+<p><img src="image/photo_12.jpg" id="fig:001" style="width:60.0%" /></p>
+<h1 id="section-9"></h1>
+<p>Уменьшаем масштаб, чтобы увидеть, где начинается уменьшение армии
+Y</p>
+<p><img src="image/photo_11.jpg" id="fig:001" style="width:60.0%" /></p>
+<h2 id="выводы">Выводы</h2>
+<p>В процессе выполнения данной лабораторной работы я построила модель
+боевых действий на языке прогаммирования Julia и посредством ПО
+OpenModelica, а также провела сравнительный анализ.</p>
